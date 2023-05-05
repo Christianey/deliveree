@@ -1,18 +1,12 @@
-import { View, Text, Image, TextInput } from "react-native";
-import React, { useLayoutEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, Image, TextInput, ScrollView } from "react-native";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import Categories from "../components/Categories";
+import FeaturedRow from "../components/FeaturedRow";
 
 export default function HomeScreen() {
-  const navigation = useNavigation();
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, []);
   return (
     <SafeAreaView className="bg-white pt-5">
       {/* Header */}
@@ -42,12 +36,38 @@ export default function HomeScreen() {
           <TextInput
             placeholder="Restaurants and Cuisines"
             keyboardType="default"
-            keyboardAppearance="light"
           />
         </View>
 
         <Entypo name="sound-mix" color={"#00ccbb"} size={24} />
       </View>
+
+      {/* Body */}
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+        {/* Categories */}
+        <Categories />
+
+        {/* Featured  */}
+        <FeaturedRow
+          id="1"
+          title="Featured"
+          description={"Paid placements from our partners"}
+        />
+
+        {/* Tasty Discounts */}
+        <FeaturedRow
+          id="2"
+          title="Tasty Discounts"
+          description={"Paid placements from our partners"}
+        />
+
+        {/* Offers near you */}
+        <FeaturedRow
+          id="3"
+          title="Offers near You!"
+          description={"Why not support your local restaurant tonight?!"}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 }

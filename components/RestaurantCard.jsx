@@ -25,6 +25,7 @@ export default function RestaurantCard({
       <Image source={{ uri: imgUrl }} className="h-36 w-64 rounded-sm" />
       <View className="px-3 pb-4">
         <Text className="font-bold text-lg pt-2">{title}</Text>
+        
         <View className="flex-row items-center space-x-1">
           <AntDesign
             name="star"
@@ -37,7 +38,7 @@ export default function RestaurantCard({
           </Text>
         </View>
 
-        <View className="flex-row">
+        <View className="flex-row items-center">
           <Entypo
             name="location-pin"
             size={22}

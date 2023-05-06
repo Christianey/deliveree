@@ -6,7 +6,8 @@ export default function CategoryCard({ title, imgUrl }) {
     <TouchableOpacity className="relative mr-2 overflow-hidden rounded">
       <Image
         source={{ uri: "https://links.papareact.com/gn7" }}
-        className="h-20 w-20"
+        // className="h-20 w-20"
+        style={{height: "100px", width: "200px"}}
       />
       <Text className="absolute bottom-0 left-0 text-white font-bold p-1 bg-black/50 w-full">
         {title}

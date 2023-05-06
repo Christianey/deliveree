@@ -2,7 +2,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "./screens/HomeScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import 'react-native-url-polyfill/auto';
+// import "./nativewind-output";
+import { NativeWindStyleSheet  } from "nativewind";
+
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 const Stack = createNativeStackNavigator();
 

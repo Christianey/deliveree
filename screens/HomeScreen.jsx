@@ -6,6 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
+import { setupURLPolyfill } from "react-native-url-polyfill";
 
 export default function HomeScreen() {
   const [featured, setFeatured] = useState([]);
@@ -81,7 +82,6 @@ export default function HomeScreen() {
             description={category.short_description}
           />
         ))}
-       
       </ScrollView>
     </SafeAreaView>
   );

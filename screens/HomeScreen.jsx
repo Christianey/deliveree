@@ -6,7 +6,10 @@ import { AntDesign } from "@expo/vector-icons";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
-import { setupURLPolyfill } from "react-native-url-polyfill";
+import poly, {URL, URLSearchParams, setupURLPolyfill} from "react-native-url-polyfill";
+
+
+
 
 export default function HomeScreen() {
   const [featured, setFeatured] = useState([]);
@@ -14,9 +17,10 @@ export default function HomeScreen() {
   useEffect(() => {
     async function fetchFeatured() {
       try {
-        const results = await sanityClient.fetch(`*[_type == "featured"] {
+        const results = await sanityClient.fetch(`
+        *[_type == "featured"] {
           ...,
-          restaurants[] -> {
+          restaurant[] -> {
             ...,
             dishes[] -> {
             type -> {
@@ -44,7 +48,7 @@ export default function HomeScreen() {
           />
           <View>
             <Text className="font-bold text-gray-400 text-xs">
-              Deliver Now!
+              Deliver Now O!
             </Text>
             <Text className="font-bold text-xl">Current Location</Text>
           </View>
@@ -57,11 +61,12 @@ export default function HomeScreen() {
 
       {/* Search */}
       <View className="flex-row items-center space-x-2 pb-2 mx-4">
-        <View className="flex-row flex-1 items-center space-x-2 bg-gray-200 p-3 rounded-md">
+        <View className="flex-row flex-1 items-center space-x-2 bg-gray-200 pl-3  rounded-md">
           <AntDesign name="search1" size={20} color={"gray"} />
           <TextInput
             placeholder="Restaurants and Cuisines"
             keyboardType="default"
+            className="h-full w-full p-3"
           />
         </View>
 
@@ -80,6 +85,7 @@ export default function HomeScreen() {
             id={category._id}
             title={category.name}
             description={category.short_description}
+            restaurants={category.restaurant}
           />
         ))}
       </ScrollView>

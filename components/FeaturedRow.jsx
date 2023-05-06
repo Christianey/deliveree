@@ -3,7 +3,8 @@ import React from "react";
 import { AntDesign } from "@expo/vector-icons";
 import RestaurantCard from "./RestaurantCard";
 
-export default function FeaturedRow({ title, description, id }) {
+export default function FeaturedRow({ title, description, restaurants }) {
+  
   return (
     <View className="px-4">
       <View className="mt-4 flex-row items-center justify-between ">
@@ -12,17 +13,27 @@ export default function FeaturedRow({ title, description, id }) {
       </View>
       <Text className="text-xs text-gray-500">{description}</Text>
       <ScrollView
-      className="pt-4"
+        className="pt-4"
         contentContainerStyle={{ paddingHorizontal: 15 }}
         showsHorizontalScrollIndicator={false}
         horizontal
       >
+        {restaurants?.map((restaurant) => (
+          <RestaurantCard
+            key={restaurant._id}
+            id={restaurant._id}
+            title={restaurant.name}
+            rating={restaurant.rating}
+            genre={restaurant.genre}
+            address={restaurant.address}
+            short_description={restaurant.short_description}
+            dishes={restaurant.dishes}
+            long={restaurant.long}
+            lat={restaurant.lat}
+            imgUrl={restaurant.imgUrl}
+          />
+        ))}
         {/* Restaurant Cards */}
-        <RestaurantCard id={123} imgUrl={"https://links.papareact.com/gn7"} title="Yo Sushi" rating={4.5} genre="japanese" address={"123 Main street"} short_description={"This is a short descriptoin"} dishes={[]} long={20} lat={0} />
-        <RestaurantCard id={123} imgUrl={"https://links.papareact.com/gn7"} title="Yo Sushi" rating={4.5} genre="japanese" address={"123 Main street"} short_description={"This is a short descriptoin"} dishes={[]} long={20} lat={0} />
-        <RestaurantCard id={123} imgUrl={"https://links.papareact.com/gn7"} title="Yo Sushi" rating={4.5} genre="japanese" address={"123 Main street"} short_description={"This is a short descriptoin"} dishes={[]} long={20} lat={0} />
-        <RestaurantCard id={123} imgUrl={"https://links.papareact.com/gn7"} title="Yo Sushi" rating={4.5} genre="japanese" address={"123 Main street"} short_description={"This is a short descriptoin"} dishes={[]} long={20} lat={0} />
-        <RestaurantCard id={123} imgUrl={"https://links.papareact.com/gn7"} title="Yo Sushi" rating={4.5} genre="japanese" address={"123 Main street"} short_description={"This is a short descriptoin"} dishes={[]} long={20} lat={0} />
       </ScrollView>
     </View>
   );

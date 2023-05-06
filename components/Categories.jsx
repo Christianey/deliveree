@@ -1,8 +1,18 @@
 import { ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CategoryCard from "./CategoryCard";
+import sanityClient, { urlFor } from "../sanity";
 
 export default function Categories() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(`*[_type == 'category']`)
+      .then((result) => setCategories(result));
+  }, []);
+
+  console.log({ categories });
   return (
     <ScrollView
       horizontal
@@ -10,13 +20,10 @@ export default function Categories() {
       showsHorizontalScrollIndicator={false}
     >
       {/* Category card */}
-      <CategoryCard imgUrl={"https://links.papareact.com/wru"} title="Testing" />
-      <CategoryCard imgUrl={"https://links.papareact.com/wru"} title="Testing" />
-      <CategoryCard imgUrl={"https://links.papareact.com/wru"} title="Testing" />
-      <CategoryCard imgUrl={"https://links.papareact.com/wru"} title="Testing" />
-      <CategoryCard imgUrl={"https://links.papareact.com/wru"} title="Testing" />
-      <CategoryCard imgUrl={"https://links.papareact.com/wru"} title="Testing" />
-      <CategoryCard imgUrl={"https://links.papareact.com/wru"} title="Testing" />
+      {categories?.map(({image, name}) => <CategoryCard
+        imgUrl={urlFor(image).url()}
+        title={name}
+      /> )}
     </ScrollView>
   );
 }

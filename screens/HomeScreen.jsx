@@ -1,12 +1,37 @@
 import { View, Text, Image, TextInput, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+import sanityClient from "../sanity";
 
 export default function HomeScreen() {
+  const [featured, setFeatured] = useState([]);
+
+  useEffect(() => {
+    async function fetchFeatured() {
+      try {
+        const results = await sanityClient.fetch(`*[_type == "featured"] {
+          ...,
+          restaurants[] -> {
+            ...,
+            dishes[] -> {
+            type -> {
+              name
+              }}
+        }}`);
+        setFeatured(results);
+      } catch (error) {
+        console.log("failed");
+        console.log(error);
+      }
+    }
+
+    fetchFeatured();
+  }, []);
+
   return (
     <SafeAreaView className="bg-white pt-5">
       {/* Header */}
@@ -48,25 +73,15 @@ export default function HomeScreen() {
         <Categories />
 
         {/* Featured  */}
-        <FeaturedRow
-          id="1"
-          title="Featured"
-          description={"Paid placements from our partners"}
-        />
-
-        {/* Tasty Discounts */}
-        <FeaturedRow
-          id="2"
-          title="Tasty Discounts"
-          description={"Paid placements from our partners"}
-        />
-
-        {/* Offers near you */}
-        <FeaturedRow
-          id="3"
-          title="Offers near You!"
-          description={"Why not support your local restaurant tonight?!"}
-        />
+        {featured?.map((category) => (
+          <FeaturedRow
+            key={category._id}
+            id={category._id}
+            title={category.name}
+            description={category.short_description}
+          />
+        ))}
+       
       </ScrollView>
     </SafeAreaView>
   );

@@ -12,7 +12,6 @@ export default function Categories() {
       .then((result) => setCategories(result));
   }, []);
 
-  console.log({ categories });
   return (
     <ScrollView
       horizontal
@@ -20,10 +19,9 @@ export default function Categories() {
       showsHorizontalScrollIndicator={false}
     >
       {/* Category card */}
-      {categories?.map(({image, name}) => <CategoryCard
-        imgUrl={urlFor(image).url()}
-        title={name}
-      /> )}
+      {categories?.map(({ image, name, _id }) => (
+        <CategoryCard key={_id} imgUrl={urlFor(image).url()} title={name} />
+      ))}
     </ScrollView>
   );
 }

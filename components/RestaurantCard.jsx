@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import { urlFor } from "../sanity";
+import { useNavigation } from "@react-navigation/native";
 
 export default function RestaurantCard({
   id,
@@ -15,8 +16,25 @@ export default function RestaurantCard({
   long,
   lat,
 }) {
+  const navigation = useNavigation();
+
+  console.log({ short_description });
   return (
     <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("Restaurant", {
+          id,
+          imgUrl,
+          title,
+          rating,
+          genre,
+          address,
+          short_description,
+          dishes,
+          long,
+          lat,
+        })
+      }
       className="mr-3 bg-white mb-2 rounded-md"
       style={{
         boxShadow:
@@ -30,6 +48,7 @@ export default function RestaurantCard({
       />
       <View className="px-3 pb-4">
         <Text className="font-bold text-lg pt-2">{title}</Text>
+
         <View className="flex-row items-center space-x-1">
           <AntDesign
             name="star"
@@ -42,7 +61,7 @@ export default function RestaurantCard({
           </Text>
         </View>
 
-        <View className="flex-row">
+        <View className="flex-row items-center">
           <Entypo
             name="location-pin"
             size={22}

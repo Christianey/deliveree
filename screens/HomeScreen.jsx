@@ -6,10 +6,13 @@ import { AntDesign } from "@expo/vector-icons";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
 import sanityClient from "../sanity";
-import poly, {URL, URLSearchParams, setupURLPolyfill} from "react-native-url-polyfill";
+import poly, {
+  URL,
+  URLSearchParams,
+  setupURLPolyfill,
+} from "react-native-url-polyfill";
 
-
-
+// setupURLPolyfill()
 
 export default function HomeScreen() {
   const [featured, setFeatured] = useState([]);
@@ -37,6 +40,7 @@ export default function HomeScreen() {
     fetchFeatured();
   }, []);
 
+  console.log({ featured });
   return (
     <SafeAreaView className="bg-white pt-5">
       {/* Header */}

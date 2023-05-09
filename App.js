@@ -11,11 +11,14 @@ NativeWindStyleSheet.setOutput({
 
 const Stack = createNativeStackNavigator();
 
+
 export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false, animation: "slide_from_right" }}
+        >
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="Restaurant" component={RestaurantScreen} />
         </Stack.Navigator>

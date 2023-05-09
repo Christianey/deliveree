@@ -18,7 +18,7 @@ export default function RestaurantCard({
 }) {
   const navigation = useNavigation();
 
-  console.log({ short_description });
+  // console.log({ short_description });
   return (
     <TouchableOpacity
       onPress={() =>

@@ -26,9 +26,8 @@ export default function HomeScreen() {
           restaurant[] -> {
             ...,
             dishes[] -> {
-            type -> {
-              name
-              }}
+              ...
+            }
         }}`);
         setFeatured(results);
       } catch (error) {

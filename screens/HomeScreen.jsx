@@ -39,7 +39,6 @@ export default function HomeScreen() {
     fetchFeatured();
   }, []);
 
-  console.log({ featured });
   return (
     <SafeAreaView className="bg-white pt-5">
       {/* Header */}

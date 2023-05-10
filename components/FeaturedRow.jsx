@@ -4,7 +4,6 @@ import { AntDesign } from "@expo/vector-icons";
 import RestaurantCard from "./RestaurantCard";
 
 export default function FeaturedRow({ title, description, restaurants }) {
-  console.log({ restaurants });
   return (
     <View className="px-4">
       <View className="mt-4 flex-row items-center justify-between ">

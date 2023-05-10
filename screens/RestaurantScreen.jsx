@@ -1,10 +1,12 @@
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { urlFor } from "../sanity";
 import { AntDesign, Entypo } from "@expo/vector-icons";
 import DishCard from "../components/DishCard";
 import BasketIcon from "../components/BasketIcon";
+import { useDispatch } from "react-redux";
+import { setRestaurant } from "../features/restaurantSlice";
 
 export default function RestaurantScreen() {
   const {
@@ -23,6 +25,22 @@ export default function RestaurantScreen() {
   } = useRoute();
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setRestaurant({
+      id,
+      imgUrl,
+      title,
+      rating,
+      genre,
+      address,
+      short_description,
+      dishes,
+      long,
+      lat,
+    }));
+  }, []);
 
   return (
     <>

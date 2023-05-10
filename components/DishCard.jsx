@@ -6,6 +6,7 @@ import { AntDesign } from "@expo/vector-icons";
 
 export default function DishCard({ name, description, price, image }) {
   const [isPressed, setIsPressed] = useState(false);
+
   return (
     <>
       <TouchableOpacity

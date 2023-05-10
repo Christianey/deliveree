@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addToBasket,
   removeFromBasket,
-  selectBasketItems,
   selectBasketItemsWithId,
 } from "../features/basketSlice";
+import BasketIcon from "./BasketIcon";
 
 export default function DishCard({ id, name, description, price, image }) {
   const [isPressed, setIsPressed] = useState(false);
@@ -54,8 +54,15 @@ export default function DishCard({ id, name, description, price, image }) {
       {isPressed && (
         <View className="bg-white px-4">
           <View className="flex-row items-center space-x-2 pb-3">
-            <TouchableOpacity onPress={removeItemFromBasket} disabled={!item.length}>
-              <AntDesign name="minuscircle" size={40} color={item.length ? "#00CCBB" : "gray"} />
+            <TouchableOpacity
+              onPress={removeItemFromBasket}
+              disabled={!item.length}
+            >
+              <AntDesign
+                name="minuscircle"
+                size={40}
+                color={item.length ? "#00CCBB" : "gray"}
+              />
             </TouchableOpacity>
 
             <Text>{item.length}</Text>

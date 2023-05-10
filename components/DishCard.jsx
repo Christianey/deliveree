@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
-import CurrencyFormat from "react-currency-format";
 import { urlFor } from "../sanity";
 import { AntDesign } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,13 +8,16 @@ import {
   removeFromBasket,
   selectBasketItemsWithId,
 } from "../features/basketSlice";
-import BasketIcon from "./BasketIcon";
+import { formatCurrency } from "react-native-format-currency";
 
 export default function DishCard({ id, name, description, price, image }) {
   const [isPressed, setIsPressed] = useState(false);
-  // const items = useSelector(selectBasketItems);
   const item = useSelector((state) => selectBasketItemsWithId(state, id));
   const dispatch = useDispatch();
+  const [value] = formatCurrency({
+    amount: price,
+    code: "USD",
+  });
 
   const addItemToBasket = () => {
     dispatch(addToBasket({ id, name, description, price, image }));
@@ -37,9 +39,7 @@ export default function DishCard({ id, name, description, price, image }) {
           <View className="flex-1 pr-2">
             <Text className="text-lg mb-1">{name}</Text>
             <Text className="text-gray-400">{description}</Text>
-            <Text className="text-gray-400 mt-2">
-              <CurrencyFormat value={price} displayType="text" prefix="£" />
-            </Text>
+            <Text className="text-gray-400 mt-2">{value}</Text>
           </View>
           <View>
             <Image

@@ -6,6 +6,7 @@ import { NativeWindStyleSheet } from "nativewind";
 import RestaurantScreen from "./screens/RestaurantScreen";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import BasketScreen from "./screens/BasketScreen";
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -26,6 +27,11 @@ export default function App() {
           >
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Restaurant" component={RestaurantScreen} />
+            <Stack.Screen
+              name="Basket"
+              component={BasketScreen}
+              options={{ presentation: "modal", animation: "slide_from_bottom" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </SafeAreaProvider>

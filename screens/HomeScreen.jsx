@@ -12,7 +12,7 @@ import poly, {
   setupURLPolyfill,
 } from "react-native-url-polyfill";
 
-// setupURLPolyfill()
+setupURLPolyfill()
 
 export default function HomeScreen() {
   const [featured, setFeatured] = useState([]);

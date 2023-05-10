@@ -3,15 +3,35 @@ import React, { useState } from "react";
 import CurrencyFormat from "react-currency-format";
 import { urlFor } from "../sanity";
 import { AntDesign } from "@expo/vector-icons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToBasket,
+  removeFromBasket,
+  selectBasketItems,
+  selectBasketItemsWithId,
+} from "../features/basketSlice";
 
-export default function DishCard({ name, description, price, image }) {
+export default function DishCard({ id, name, description, price, image }) {
   const [isPressed, setIsPressed] = useState(false);
+  // const items = useSelector(selectBasketItems);
+  const item = useSelector((state) => selectBasketItemsWithId(state, id));
+  const dispatch = useDispatch();
+
+  const addItemToBasket = () => {
+    dispatch(addToBasket({ id, name, description, price, image }));
+  };
+
+  const removeItemFromBasket = () => {
+    dispatch(removeFromBasket({ id }));
+  };
 
   return (
     <>
       <TouchableOpacity
         onPress={() => setIsPressed(!isPressed)}
-        className={`border bg-white p-4 border-gray-200 ${isPressed && "border-b-0"}`}
+        className={`border bg-white p-4 border-gray-200 ${
+          isPressed && "border-b-0"
+        }`}
       >
         <View className="flex-row">
           <View className="flex-1 pr-2">
@@ -34,16 +54,15 @@ export default function DishCard({ name, description, price, image }) {
       {isPressed && (
         <View className="bg-white px-4">
           <View className="flex-row items-center space-x-2 pb-3">
-            <TouchableOpacity>
-              <AntDesign name="minuscircle" size={40} color="#00CCBB" />
+            <TouchableOpacity onPress={removeItemFromBasket} disabled={!item.length}>
+              <AntDesign name="minuscircle" size={40} color={item.length ? "#00CCBB" : "gray"} />
             </TouchableOpacity>
 
-            <Text>0</Text>
+            <Text>{item.length}</Text>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={addItemToBasket}>
               <AntDesign name="pluscircle" size={40} color="#00CCBB" />
             </TouchableOpacity>
-
           </View>
         </View>
       )}

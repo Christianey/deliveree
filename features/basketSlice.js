@@ -11,16 +11,16 @@ export const basketSlice = createSlice({
     addToBasket: (state, { payload }) => {
       state.items = [...state.items, payload];
     },
-    removeFromBasket: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload;
+    removeFromBasket: (state, { payload }) => {
+      const index = state.items.findIndex((item) => item.id === payload.id);
+      state.items.splice(index, 1);
     },
   },
 });
 
 export const selectBasketItems = (state) => state.basket.items;
+export const selectBasketItemsWithId = (state, id) =>
+  state.basket.items.filter((item) => item.id === id);
 
 // Action creators are generated for each case reducer function
 export const { addToBasket, removeFromBasket } = basketSlice.actions;

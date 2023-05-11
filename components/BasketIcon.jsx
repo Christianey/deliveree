@@ -3,9 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectBasketItems, selectBasketTotal } from "../features/basketSlice";
 import { useNavigation } from "@react-navigation/native";
-import {
-  formatCurrency,
-} from "react-native-format-currency";
+import { formatCurrency } from "react-native-format-currency";
 
 export default function BasketIcon() {
   const items = useSelector(selectBasketItems);
@@ -15,6 +13,8 @@ export default function BasketIcon() {
     amount: basketTotal,
     code: "USD",
   });
+
+  if (items.length === 0) return null;
 
   return (
     <View className="absolute bottom-0 w-full my-2 z-50">

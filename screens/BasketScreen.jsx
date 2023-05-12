@@ -31,8 +31,6 @@ export default function BasketScreen() {
     setGroupedItemsInBasket(groupedItems);
   }, [items]);
 
-  console.log({ groupedItemsInBasket });
-
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
@@ -107,7 +105,10 @@ export default function BasketScreen() {
             </Text>
           </View>
 
-          <TouchableOpacity className="rounded-lg bg-[#00CCBB] p-4">
+          <TouchableOpacity
+            className="rounded-lg bg-[#00CCBB] p-4"
+            onPress={() => navigation.navigate("PlaceOrder")}
+          >
             <Text className="text-center text-white font-bold text-lg">
               Place Order
             </Text>

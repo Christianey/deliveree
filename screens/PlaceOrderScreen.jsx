@@ -21,10 +21,11 @@ export default function PlaceOrder() {
       >
         Waiting for restaurant to accept your order
       </Animatable.Text>
+
       <Progress.Circle
         size={60}
         indeterminate={true}
-        color="transparent"
+        color="white"
         style={{ backgroundColor: "transparent" }}
       />
     </SafeAreaView>

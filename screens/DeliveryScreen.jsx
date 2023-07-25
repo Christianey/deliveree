@@ -12,7 +12,7 @@ export default function DeliveryScreen() {
   const navigation = useNavigation();
   const { lat, long, title } = useSelector(selectRestaurant);
 
-  console.log({ lat, long, title });
+  // console.log({ lat, long, title });
   return (
     <View className="bg-[#00CCBB] h-full">
       <SafeAreaView className="z-50 h-5/6 flex-auto">

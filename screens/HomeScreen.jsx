@@ -31,7 +31,7 @@ export default function HomeScreen() {
         }}`);
         setFeatured(results);
       } catch (error) {
-        console.log("failed");
+        console.log("fetch failed");
         console.log(error);
       }
     }
